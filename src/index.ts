@@ -9,10 +9,9 @@ type Listener = {
 type EventName = string
 type DOMSelector = string
 
-const isBrowser = typeof window !== 'undefined'
-
 @Singleton
 class GlobalDOMListener {
+  public isBrowser = typeof window !== 'undefined'
   private listeners: Record<EventName, Listener[]> = {}
 
   constructor() {
@@ -38,7 +37,7 @@ class GlobalDOMListener {
   }
 
   private _bindListener(eventName: EventName) {
-    if (!isBrowser) return
+    if (!this.isBrowser) return
     window.document.body.addEventListener(
       eventName,
       this._handleEvent.bind(this)
@@ -46,7 +45,7 @@ class GlobalDOMListener {
   }
 
   private _init() {
-    if (!isBrowser) return
+    if (!this.isBrowser) return
     for (const eventName in this.listeners) {
       this._bindListener(eventName)
     }
