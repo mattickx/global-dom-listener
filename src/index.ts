@@ -77,6 +77,7 @@ class GlobalDOMListener {
       | FocusEvent
       | Event
   ) {
+    if (!e.target) return
     const eventName = e.type
     for (let i = this.listeners[eventName]?.length - 1; i >= 0; i--) {
       const listener = this.listeners[eventName][i]
@@ -84,7 +85,6 @@ class GlobalDOMListener {
         this.listeners[eventName].splice(i, 1)
         continue
       }
-      if (!e.target) continue
       const target = (e.target as Element).closest(listener.selector)
       if (target && target.matches(listener.selector)) {
         listener.callback({ ...e, target })
