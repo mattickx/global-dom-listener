@@ -6,13 +6,13 @@ on:
       NPM_TOKEN:
         required: true
 
-permissions:
-  contents: read # for checkout
-
 jobs:
   release:
     name: Publish
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
