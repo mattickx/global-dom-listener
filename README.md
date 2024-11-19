@@ -12,7 +12,18 @@ Or install through npm by using:<br>
 
 ## 🔧 Example
 
-See [this HTML file](./index.html)
+### Example with custom attribute data-custom-attribute :
+```js
+window.GlobalDOMListenerInstance.on('click', '[data-custom-attribute]', (e) => {
+  // Do something ...
+});
+```
+This will work on any element with the data-custom-attribute attribute.
+Even when such elements are dynamically added after this function call!
+
+### Working example :
+
+See a working examle in [this HTML file](./index.html)
 
 ## 🤝 Contribute
 Continuous improvement is encouraged and your contributions are valuable!
