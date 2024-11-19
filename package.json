@@ -21,6 +21,11 @@
   "files": [
     "dist"
   ],
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
   "scripts": {
     "dev": "tsc && vite build --watch",
     "start": "vite --host --open",
@@ -34,20 +39,24 @@
     "pack": "npm run build && npm run minify && npm pack",
     "publish": "npm run build && npm run minify && npm pack",
     "prepare": "husky",
+    "commit": "git-cz",
     "commitlint": "commitlint --edit"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
+    "@commitlint/cz-commitlint": "^19.5.0",
     "@commitlint/format": "^19.5.0",
     "@types/node": "^22.8.1",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
+    "commitizen": "^4.3.1",
     "dts-bundle-generator": "^9.5.1",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^9.1.7",
+    "inquirer": "^9.3.7",
     "prettier": "^3.3.3",
     "tslib": "^2.8.0",
     "typescript": "^5.6.3",
