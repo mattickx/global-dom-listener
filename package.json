@@ -1,5 +1,5 @@
 {
-  "name": "global-dom-listener",
+  "name": "@mattickx/global-dom-listener",
   "version": "0.0.1",
   "description": "Global DOM listener for current and dynamically added elements",
   "author": "Mathieu Magalhaes <mathieu.magalhaes@gmail.com>",
