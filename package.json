@@ -1,6 +1,6 @@
 {
   "name": "@mattickx/global-dom-listener",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Global DOM listener for current and dynamically added elements",
   "author": "Mathieu Magalhaes <mathieu.magalhaes@gmail.com>",
   "homepage": "https://github.com/mattickx/global-dom-listener",
