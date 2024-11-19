@@ -14,7 +14,7 @@ Or install through npm by using:<br>
 
 ### Example with custom attribute data-custom-attribute :
 ```js
-window.GlobalDOMListenerInstance.on('click', '[data-custom-attribute]', (e) => {
+window.GlobalDOMListener.on('click', '[data-custom-attribute]', (e) => {
   // Do something ...
 });
 ```

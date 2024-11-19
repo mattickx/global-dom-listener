@@ -1,3 +1,5 @@
+import { Singleton } from "./singleton"
+
 type Listener = {
   selector: string
   controller: AbortController
@@ -7,25 +9,9 @@ type Listener = {
 type EventName = string
 type DOMSelector = string
 
-type ClassType<T> = new (...args: unknown[]) => T
-
 const isBrowser = typeof window !== 'undefined'
 
-const SingletonFactory = <T>(
-  ClassToCreate: ClassType<T>,
-  ...args: ConstructorParameters<ClassType<T>>
-) => {
-  let instance: InstanceType<ClassType<T>>
-  return {
-    getInstance: function () {
-      if (!instance) {
-        instance = new ClassToCreate(...args)
-      }
-      return instance
-    },
-  }
-}
-
+@Singleton
 class GlobalDOMListener {
   private listeners: Record<EventName, Listener[]> = {}
 
@@ -93,10 +79,8 @@ class GlobalDOMListener {
   }
 }
 
-export const GlobalDOMListenerFactory = SingletonFactory(GlobalDOMListener)
-export const GlobalDOMListenerInstance = GlobalDOMListenerFactory.getInstance()
+export const GlobalDOMListenerInstance = new GlobalDOMListener()
 
-if (isBrowser) {
-  window.GlobalDOMListenerFactory = GlobalDOMListenerFactory
-  window.GlobalDOMListenerInstance = GlobalDOMListenerInstance
+if (GlobalDOMListenerInstance.isBrowser) {
+  window.GlobalDOMListener = GlobalDOMListenerInstance
 }

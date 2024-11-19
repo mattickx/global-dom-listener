@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Global DOM Listener</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  </head>
-  <body style="background: #DDD">
-    <div class="test-1" style="margin-bottom: 20px;">
-      <div class="test-2">
-        <div class="test-3">
-          <div class="test-4">
-            <div data-event-listener>Click me to trigger</div>
-          </div>
+  <title>Global DOM Listener</title>
+
+</head>
+
+<body style="background: #DDD">
+  <div class="test-1" style="margin-bottom: 20px;">
+    <div class="test-2">
+      <div class="test-3">
+        <div class="test-4">
+          <div data-event-listener>Click me to trigger</div>
         </div>
       </div>
     </div>
+  </div>
 
-    <button onclick="AddDomElement()">Add</button>
-    <input type="text" data-track>
+  <button onclick="AddDomElement()">Add</button>
+  <input type="text" data-track>
 
-    <script src="./dist/index.umd.js"></script>
+  <script src="./dist/index.umd.js"></script>
 
-    <script>
-      function AddDomElement() {
-        console.log('test');
-        const div = document.createElement('div');
-        div.setAttribute('data-event-listener', 'true');
-        div.innerText = 'Click me to trigger';
-        div.style.marginTop = '8px';
-        document.body.appendChild(div);
-      }
+  <script>
+    function AddDomElement() {
+      var div = document.createElement('div');
+      div.setAttribute('data-event-listener', 'true');
+      div.innerText = 'Click me to trigger';
+      div.style.marginTop = '8px';
+      document.body.appendChild(div);
+    }
 
-      window.GlobalDOMListenerInstance.on('click', '[data-event-listener]', (e) => {
-        console.log('clicked', e);
-      });
-    </script>
-  </body>
+    window.GlobalDOMListener.on('click', '[data-event-listener]', (e) => {
+      console.log('clicked', e);
+    });
+  </script>
+</body>
+
 </html>
