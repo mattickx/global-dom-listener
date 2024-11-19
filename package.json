@@ -1,0 +1,52 @@
+{
+  "name": "global-dom-listener",
+  "version": "0.0.1",
+  "description": "Global DOM listener for current and dynamically added elements",
+  "author": "Mathieu Magalhaes <mathieu.magalhaes@gmail.com>",
+  "homepage": "https://github.com/mattickx/global-dom-listener",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "github:mattickx/global-dom-listener"
+  },
+  "keywords": [
+    "DOM",
+    "listener"
+  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "umd": "dist/index.umd.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsc && vite build --watch",
+    "start": "vite --host --open",
+    "build": "tsc && vite build",
+    "build:types": "dts-bundle-generator --config ./dts-bundle-generator.config.ts",
+    "lint:scripts": "eslint ./src",
+    "format:scripts": "prettier ./src --write",
+    "test": "./node_modules/.bin/jest",
+    "lint": "tslint --project .",
+    "minify": "node ./scripts/minify.js",
+    "pack": "npm run build && npm run minify && npm pack",
+    "publish": "npm run build && npm run minify && npm pack"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.1",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
+    "dts-bundle-generator": "^9.5.1",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3",
+    "tslib": "^2.8.0",
+    "typescript": "^5.6.3",
+    "uglify-js": "3.19.3",
+    "vite": "^5.4.10",
+    "vite-plugin-dts": "^4.3.0"
+  }
+}
