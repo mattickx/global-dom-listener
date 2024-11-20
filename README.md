@@ -27,9 +27,11 @@
 You can use the hosted CDN file directly in your browser/html :<br>
 
 <a href="https://cdn.jsdelivr.net/npm/@mattickx/global-dom-listener/dist/index.umd.js">
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@mattickx/global-dom-listener/dist/index.umd.js"></script>
 ```
+
 </a>
 
 ### Using the NPM package
