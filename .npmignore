@@ -13,7 +13,6 @@
 .prettierrc
 
 CHANGELOG.md
-LICENSE.md
 README.md
 
 tsconfig.json
