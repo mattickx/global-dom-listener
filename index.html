@@ -7,35 +7,123 @@
 
   <title>Global DOM Listener</title>
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #DDD;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+
+    pre {
+      padding: 8px;
+      background: #FFF;
+      border: 1px solid #ccc;
+      max-height: 70vh;
+      overflow-y: scroll;
+    }
+
+    #elements-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  </style>
+
 </head>
 
-<body style="background: #DDD">
-  <div class="test-1" style="margin-bottom: 20px;">
-    <div class="test-2">
-      <div class="test-3">
-        <div class="test-4">
-          <div data-event-listener>Click me to trigger</div>
-        </div>
-      </div>
+<body>
+  <div>
+    <h1>Global DOM Listener</h1>
+    <div>
+      <button onclick="AddButton()">Add Button to click</button>
+      <button onclick="AddInput()">Add Input to type in</button>
     </div>
+    <h2>Log</h2>
+    <pre></pre>
   </div>
 
-  <button onclick="AddDomElement()">Add</button>
-  <input type="text" data-track>
+  <div>
+    <h2>Elements</h2>
+    <div id="elements-container">
+      <!-- Static input -->
+      <input type="text" data-track-input placeholder="Type here to trigger ...">
+
+      <!-- Static button -->
+      <div class="test-1">
+        <div class="test-2">
+          <div class="test-3">
+            <div class="test-4">
+              <!-- Also works deeply nested -->
+              <button data-track-button>Click me to trigger</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic elements -->
+    </div>
+  </div>
 
   <script src="./dist/index.umd.js"></script>
 
   <script>
-    function AddDomElement() {
-      var div = document.createElement('div');
-      div.setAttribute('data-event-listener', 'true');
+    const container = document.getElementById('elements-container');
+
+    function AddButton() {
+      var div = document.createElement('button');
+      div.setAttribute('data-track-button', 'true');
       div.innerText = 'Click me to trigger';
-      div.style.marginTop = '8px';
-      document.body.appendChild(div);
+      container.appendChild(div);
     }
 
-    window.GlobalDOMListener.on('click', '[data-event-listener]', (e) => {
-      console.log('clicked', e);
+    function AddInput() {
+      var div = document.createElement('input');
+      div.setAttribute('data-track-input', 'true');
+      div.innerText = 'Type here to trigger ...';
+      container.appendChild(div);
+    }
+
+    const log = document.querySelector('pre');
+
+    window.GlobalDOMListener.on('click', '[data-track-button]', (e) => {
+      log.innerHTML += '<br>click on a data-track-button';
+      console.log('clicked', e.target, e);
+    });
+
+    window.GlobalDOMListener.on('keypress', '[data-track-input]', (e) => {
+      log.innerHTML += '<br>keypress on a data-track-input';
+      console.log('keypress', e.target, e);
+    });
+
+    window.GlobalDOMListener.on('focus', '[data-track-input]', (e) => {
+      log.innerHTML += '<br>focus on a data-track-input';
+      console.log('focus', e.target, e);
+    });
+
+    window.GlobalDOMListener.on('blur', '[data-track-input]', (e) => {
+      log.innerHTML += '<br>blur on a data-track-input';
+      console.log('blur', e.target, e);
     });
   </script>
 </body>
