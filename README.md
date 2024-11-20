@@ -1,27 +1,78 @@
-# Global DOM Listener
+<h1 align="center">Global DOM Listener</h1>
 
-A global listener for current AND dynamically added elements.
+<p align="center">
+  <a href="https://github.com/mattickx/global-dom-listener"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/mattickx/global-dom-listener/.github%2Fworkflows%2Fpublish.yaml"></a>
+  &nbsp;
+  <a href="https://www.npmjs.com/package/@mattickx/global-dom-listener"><img alt="NPM latest version" src="https://img.shields.io/npm/v/@mattickx/global-dom-listener"></a>
+  &nbsp;
+  <a href="https://cdn.jsdelivr.net/npm/@mattickx/global-dom-listener/dist/index.umd.js"><img alt="CDN Package size" src="https://img.shields.io/badge/CDN-<_2kB-blue"></a>
+  &nbsp;
+  <a href="https://www.npmjs.com/package/@mattickx/global-dom-listener"><img alt="NPM Downloads per week" src="https://img.shields.io/npm/dw/@mattickx/global-dom-listener"></a>
+  &nbsp;
+  <a href="https://github.com/mattickx/global-dom-listener/LICENSE.md"><img alt="License" src="https://img.shields.io/github/license/mattickx/global-dom-listener"></a>
+</p>
 
-## ⚙️ Usage
+<p align="center">
+  A global listener for current AND dynamically added DOM elements in the browser.
+</p>
+
+<p align="center">
+ <a href="#-quick-start">Getting Started</a> | <a href="./index.html">Example</a>
+</p>
+
+## ⚙️ Installation
+
+### Using CDN
 
 You can use the hosted CDN file directly in your browser/html :<br>
-[https://cdn.jsdelivr.net/npm/@mattickx/global-dom-listener/dist/index.umd.js](https://cdn.jsdelivr.net/npm/@mattickx/global-dom-listener/dist/index.umd.js)
 
-Or install through npm by using:<br>
-`npm install --save @mattickx/global-dom-listener`
+<a href="https://cdn.jsdelivr.net/npm/@mattickx/global-dom-listener/dist/index.umd.js"></script>
+```html
+<script src="https://cdn.jsdelivr.net/npm/@mattickx/global-dom-listener/dist/index.umd.js"></script>
+```
+</a>
 
-## 🔧 Example
+### Using the NPM package
+You can install the npm package by using :<br>
+```bash
+pnpm add @mattickx/global-dom-listener
+```
+```bash
+npm install @mattickx/global-dom-listener
+```
+```bash
+yarn add @mattickx/global-dom-listener
+```
 
-### Example with custom attribute data-custom-attribute :
+## 🔧 Quick start
+Listen to a DOM event using a selector.
+
+### ID selector:
 ```js
-window.GlobalDOMListener.on('click', '[data-custom-attribute]', (e) => {
+window.GlobalDOMListener.on('click', '#custom-id', (event) => {
   // Do something ...
+  // event.target will be an instance of an element matching the selector
 });
 ```
-This will work on any element with the data-custom-attribute attribute.
-Even when such elements are dynamically added after this function call!
 
-### Working example :
+### Class selector:
+```js
+window.GlobalDOMListener.on('keydown', '.custom-class', (event) => {
+  // Do something ...
+  // event.target will be an instance of an element matching the selector
+});
+```
+
+### Data attribute selector:
+```js
+window.GlobalDOMListener.on('blur', '[data-custom-attribute]', (event) => {
+  // Do something ...
+  // event.target will be an instance of an element matching the selector
+});
+```
+
+
+## 🔧 Working example
 
 See a working examle in [this HTML file](./index.html)
 
@@ -32,4 +83,4 @@ If you identify areas for improvement, have suggestions or encounter issues, ple
 
 ## 📜 LICENSE
 
-This is licensed under the MIT License, see [LICENSE](./LICENSE)
+This is licensed under the MIT License, see [LICENSE](./LICENSE.md)
