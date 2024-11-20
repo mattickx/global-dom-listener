@@ -13,9 +13,10 @@ type DOMSelector = string
 class GlobalDOMListener {
   public isBrowser = typeof window !== 'undefined'
   private listeners: Record<EventName, Listener[]> = {}
+  private useCaptureEventNames: EventName[] = ['blur', 'error', 'focus', 'load', 'resize', 'scroll'] as const
 
   constructor() {
-    this._init()
+    this.init()
   }
 
   on(
@@ -25,29 +26,34 @@ class GlobalDOMListener {
   ): AbortController {
     if (!this.listeners[eventName]) {
       this.listeners[eventName] = []
-      this._bindListener(eventName)
+      this.bindListener(eventName)
     }
     const controller = new AbortController()
     this.listeners[eventName].push({ selector, controller, callback })
     return controller
   }
 
-  private _isListenerAborted(listener: Listener) {
+  private isListenerAborted(listener: Listener) {
     return listener.controller.signal.aborted
   }
 
-  private _bindListener(eventName: EventName) {
+  private shouldUseCapture(eventName: EventName) {
+    return this.useCaptureEventNames.includes(eventName)
+  }
+
+  private bindListener(eventName: EventName) {
     if (!this.isBrowser) return
-    window.document.body.addEventListener(
+    window.document.addEventListener(
       eventName,
-      this._handleEvent.bind(this)
+      this._handleEvent.bind(this),
+      this.shouldUseCapture(eventName),
     )
   }
 
-  private _init() {
+  private init() {
     if (!this.isBrowser) return
     for (const eventName in this.listeners) {
-      this._bindListener(eventName)
+      this.bindListener(eventName)
     }
   }
 
@@ -66,7 +72,7 @@ class GlobalDOMListener {
     const eventName = e.type
     for (let i = this.listeners[eventName]?.length - 1; i >= 0; i--) {
       const listener = this.listeners[eventName][i]
-      if (this._isListenerAborted(listener)) {
+      if (this.isListenerAborted(listener)) {
         this.listeners[eventName].splice(i, 1)
         continue
       }
